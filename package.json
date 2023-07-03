@@ -1,0 +1,19 @@
+{
+  "name": "microservice-assignment",
+  "version": "1.0.0",
+  "scripts": {
+    "start:gateway": "node apps/gateway/index.js",
+    "start:auth": "node apps/auth/index.js",
+    "start:user": "node apps/user/index.js",
+    "start:post": "node apps/post/index.js",
+    "start:comment": "node apps/comment/index.js",
+    "start:dev:gateway": "nodemon --watch 'apps/gateway' -e '*.js' apps/gateway/index.js",
+    "start:dev:auth": "nodemon --watch 'apps/auth' -e '*.js'  apps/auth/index.js",
+    "start:dev:user": "node --watch 'apps/user' -e '*.js'  apps/user/index.js",
+    "start:dev:post": "node --watch 'apps/post' -e '*.js'  apps/post/index.js",
+    "start:dev:comment": "node --watch 'apps/comment' -e '*.js'  apps/comment/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
