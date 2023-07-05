@@ -1,25 +1,13 @@
 const express = require('express');
-
+const { PORT } = require('../config/env');
+const appController = require('./controller/app.controller');
+const proxyController = require('./controller/proxy.controller');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use('/auth', async (req, res) => {
-    console.log('Auth');
-});
-
-app.use('/user', async (req, res) => {
-    console.log('User');
-});
-
-app.use('/post', async (req, res) => {
-    console.log('Post');
-});
-
-app.use('/comment', async (req, res) => {
-    console.log('Comment');
-});
+// app.use('/service', appController);
+app.use('*', proxyController);
 
 app.listen(PORT, () => {
-    console.log('Server is up on PORT:', PORT);
+    console.log('Gateway is up on PORT:', PORT);
 });
