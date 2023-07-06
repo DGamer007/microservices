@@ -5,7 +5,7 @@ const proxyController = require('./controller/proxy.controller');
 
 const app = express();
 
-// app.use('/service', appController);
+app.use('/service', appController);
 app.use('*', proxyController);
 
 app.listen(PORT, () => {

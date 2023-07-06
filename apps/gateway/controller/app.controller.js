@@ -3,19 +3,30 @@ const appService = require('../service/app.service');
 
 const appController = Router();
 
-appController.get('/:name/:version/:port', async (req, res) => {
-    res.send({ message: 'Get Service Success' });
+appController.get('/:key/:version/', async (req, res) => {
+    const { key, version } = req.params;
+    return service = appService.getService(key, version);
+    if (!service) return res.status(404).send({ message: 'Service not found' });
+    res.send({ message: 'Get Service Success', data: service });
 });
 
 appController.get('/all', async (req, res) => {
-    res.send({ message: 'Get All Services Success' });
+    const services = appService.getAllServices();
+    if (!services.length) return res.status(404).send({ message: 'Services not found' });
+    res.send({ message: 'Get All Services Success', data: services });
 });
 
-appController.put('/:name:/:version:/:port', async (req, res) => {
-    res.send({ message: 'Update Service Success' });
+appController.put('/:key:/:version:/:port', async (req, res) => {
+    const { key, version, port } = req.params;
+    const service = appService.saveService(req.hostname, key, version, port);
+
+    res.send({ message: 'Update Service Success', data: service });
 });
 
-appController.delete('/:name/:version/:port', async (req, res) => {
+appController.delete('/:key/:version', async (req, res) => {
+    const { key, version } = req.params;
+    if (!appService.deleteService(key, version)) return res.status(404).send({ message: 'Service not found' });
+
     res.send({ message: 'Unregister Service Success' });
 });
 
