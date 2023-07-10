@@ -5,7 +5,7 @@ const appController = Router();
 
 appController.get('/:key/:version/', async (req, res) => {
     const { key, version } = req.params;
-    return service = appService.getService(key, version);
+    const service = appService.getService(key, version);
     if (!service) return res.status(404).send({ message: 'Service not found' });
     res.send({ message: 'Get Service Success', data: service });
 });
@@ -16,9 +16,11 @@ appController.get('/all', async (req, res) => {
     res.send({ message: 'Get All Services Success', data: services });
 });
 
-appController.put('/:key:/:version:/:port', async (req, res) => {
+appController.put('/:key/:version/:port', async (req, res) => {
     const { key, version, port } = req.params;
-    const service = appService.saveService(req.hostname, key, version, port);
+    const ip = req.socket.remoteAddress;
+    const host = ip.includes(':') ? `[${ip}]` : ip;
+    const service = appService.saveService(host, key, version, port);
 
     res.send({ message: 'Update Service Success', data: service });
 });

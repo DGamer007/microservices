@@ -5,6 +5,10 @@ class Service {
         this.version = version;
         this.port = port;
     }
+
+    get server() {
+        return `http://${this.host}:${this.port}`;
+    }
 };
 
 module.exports = Service;

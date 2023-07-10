@@ -6,7 +6,7 @@ const proxyController = require('./controller/proxy.controller');
 const app = express();
 
 app.use('/service', appController);
-app.use('*', proxyController);
+app.use(/^(?!\/\bservice\b).*$/, proxyController);
 
 app.listen(PORT, () => {
     console.log('Gateway is up on PORT:', PORT);

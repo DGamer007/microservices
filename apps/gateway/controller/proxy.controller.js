@@ -1,16 +1,24 @@
 const axios = require('axios');
+const { getService } = require('../service/app.service');
 
 module.exports = async (req, res) => {
 
-    console.log(req.method);
-    console.log(req.baseUrl);
-    console.log(req.originalUrl);
-    console.log(req.url);
+    const routePattern = /\/(?<key>[^\/]+)\/(?<version>[^\/]+)\/(?<path>.*)/;
+
+    if (!routePattern.test(req.baseUrl))
+        return res.status(400).send({ message: 'Invalid Service path' });
+
+    const { groups: { key, version, path } } = routePattern.exec(req.baseUrl);
+
+
+    const service = getService(key, version);
 
     const something = await axios({
-        method: 'get',
-        url: 'http://localhost:45389'
+        method: req.method,
+        url: `${service.server}/${path}`
     });
 
-    res.send(something.data);
+    console.log(something.data);
+
+    res.send('Hello World');
 };
