@@ -1,0 +1,3 @@
+[submodule "apps/auth"]
+	path = apps/auth
+	url = https://github.com/dhruv-0-0-7/microservices-assignment-auth-service
