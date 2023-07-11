@@ -5,21 +5,19 @@
     "node": "18.15.0"
   },
   "scripts": {
-    "start:gateway": "node apps/gateway/index.js",
-    "start:auth": "USE_GATEWAY=1 node apps/auth/index.js",
+    "start": "node apps/gateway/index.js",
     "start:user": "USE_GATEWAY=1 node apps/user/index.js",
     "start:post": "USE_GATEWAY=1 node apps/post/index.js",
     "start:comment": "USE_GATEWAY=1 node apps/comment/index.js",
-    "start:dev:gateway": "set USE_GATEWAY=1 && nodemon --watch apps/gateway -e js apps/gateway/index.js",
-    "start:dev:auth": "set USE_GATEWAY=1 && nodemon --watch apps/auth -e js  apps/auth/index.js",
+    "start:dev": "env-cmd nodemon --watch apps/gateway -e js apps/gateway/index.js",
     "start:dev:user": "set USE_GATEWAY=1 && nodemon --watch apps/user -e js  apps/user/index.js",
     "start:dev:post": "set USE_GATEWAY=1 && nodemon --watch apps/post -e js  apps/post/index.js",
     "start:dev:comment": "set USE_GATEWAY=1 && nodemon --watch apps/comment -e js  apps/comment/index.js"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
+    "env-cmd": "10.1.0",
     "nodemon": "2.0.22"
   },
   "dependencies": {
