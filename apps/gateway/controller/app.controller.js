@@ -19,7 +19,6 @@ appController.get('/all', async (req, res) => {
 appController.put('/:key/:version/:port', async (req, res) => {
     const { key, version, port } = req.params;
     const ip = req.socket.remoteAddress;
-    console.log(ip);
     const host = ip.includes(':') ? `[${ip}]` : ip;
     const service = appService.saveService(host, key, version, port);
 

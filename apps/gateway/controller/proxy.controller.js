@@ -12,13 +12,25 @@ module.exports = async (req, res) => {
 
 
     const service = getService(key, version);
+    const endpoint = `/${path}`;
 
-    const something = await axios({
-        method: req.method,
-        url: `${service.server}/${path}`
-    });
+    if (!service || !service.canRequest(endpoint))
+        return res.status(500).send({ message: 'Service Unavailable' });
 
-    console.log(something.data);
+    try {
+        const requestOptions = {
+            method: req.method,
+            url: `${service.server}/${path}`,
+            timeout: service.requestTimeout * 1000
+        };
 
-    res.send('Hello World');
+        const response = await axios(requestOptions);
+        service.onRequestSuccess(endpoint);
+
+        return res.send(response.data);
+    } catch (err) {
+        service.onRequestFailure(endpoint);
+        console.error(err);
+        return res.status(500).send({ message: err.message || 'Something went wrong' });
+    }
 };
