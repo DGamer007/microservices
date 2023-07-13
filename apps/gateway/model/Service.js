@@ -1,5 +1,10 @@
 const { DEFAULT_FAILURE_THRESHOLD, DEFAULT_REQUEST_TIMEOUT, DEFAULT_COOLDOWN_PERIOD } = require('../../config/env');
 
+/*
+    Class to maintain
+    State of individual endpoint
+    of each Service
+*/
 class ServiceState {
     constructor({ coolDownPeriod }) {
         this.circuit = 'CLOSED';
@@ -20,6 +25,10 @@ class ServiceState {
     }
 }
 
+/*
+    Class to maintain
+    Information of individual Service
+*/
 class Service {
     constructor(host, key, version, port, { failureThreshold, requestTimeout, coolDownPeriod } = {}) {
         this.host = host;
@@ -32,10 +41,12 @@ class Service {
         this.coolDownPeriod = coolDownPeriod ?? DEFAULT_COOLDOWN_PERIOD;
     }
 
+    // Construct Service url
     get server() {
         return `http://${this.host}:${this.port}`;
     }
 
+    // Checks whether the Endpoint can be called or not
     canRequest(endpoint) {
         if (!this.states.has(endpoint))
             this.states.set(endpoint, new ServiceState({ coolDownPeriod: this.coolDownPeriod }));
@@ -55,11 +66,16 @@ class Service {
         return false;
     }
 
+    // Reset Endpoint State onSuccess of API call
     onRequestSuccess(endpoint) {
         const state = this.states.get(endpoint);
         state.reset();
     }
 
+    /*
+        OPEN Circuit if API call failures count
+        exceeds FailureThreshold
+     */
     onRequestFailure(endpoint) {
         const state = this.states.get(endpoint);
 
