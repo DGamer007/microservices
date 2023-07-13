@@ -27,3 +27,11 @@
     - If not provided then Default Key and Version will be assigned from ENV
 
 - After Starting services, Every endpoint of each service can be accessed via Gateway, with `[gateway_url]/[service_key]/[service_version]/[path]`
+
+## All Repository Urls
+
+- [Gateway Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-gateway)
+- [Auth Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-auth-service)
+- [User Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-user-service)
+- [Post Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-post-service)
+- [Comment Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-comment-service)
