@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { getService } = require('../service/app.service');
+const { HTTP_AUTH_USERNAME, HTTP_AUTH_PASSWORD } = require('../../config/env');
 
 /*
     Proxy Controller to
@@ -27,7 +28,11 @@ module.exports = async (req, res) => {
         const requestOptions = {
             method: req.method,
             url: `${service.server}/${path}`,
-            timeout: service.requestTimeout * 1000
+            timeout: service.requestTimeout * 1000,
+            auth: {
+                username: HTTP_AUTH_USERNAME,
+                password: HTTP_AUTH_PASSWORD
+            }
         };
 
         // Making Axios call to Service
