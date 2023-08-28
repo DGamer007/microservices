@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { getService } = require('../service/app.service');
 const { HTTP_AUTH_USERNAME, HTTP_AUTH_PASSWORD } = require('../../config/env');
 
@@ -27,19 +26,21 @@ module.exports = async (req, res) => {
     try {
         const requestOptions = {
             method: req.method,
-            url: `${service.server}/${path}`,
-            timeout: service.requestTimeout * 1000,
-            auth: {
-                username: HTTP_AUTH_USERNAME,
-                password: HTTP_AUTH_PASSWORD
-            }
+            headers: {
+                'Authorization': 'Basic ' + Buffer.from(`${HTTP_AUTH_USERNAME}:${HTTP_AUTH_PASSWORD}`).toString('base64')
+            },
+            signal: AbortSignal.timeout(service.requestTimeout * 1000)
         };
 
-        // Making Axios call to Service
-        const response = await axios(requestOptions);
+        // Making Http request using Fetch API
+        const response = await fetch(`${service.server}/${path}`, requestOptions);
+
+        if (!response.ok || response.status !== 200) throw new Error('Request failed');
+        const data = await response.json();
+
         service.onRequestSuccess(endpoint);
 
-        return res.send(response.data);
+        return res.send(data);
     } catch (err) {
         service.onRequestFailure(endpoint);
         console.error(err);

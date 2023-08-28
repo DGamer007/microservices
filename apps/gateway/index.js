@@ -5,6 +5,8 @@ const proxyController = require('./controller/proxy.controller');
 
 const app = express();
 
+app.set('trust-proxy', true);
+
 // Applying Service Registry Controller to Gateway
 app.use('/service', appController);
 

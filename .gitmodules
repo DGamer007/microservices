@@ -1,15 +1,15 @@
-[submodule "apps/auth"]
+[submodule "auth"]
 	path = apps/auth
 	url = git@github.com:dhruv-0-0-7/microservices-assignment-auth-service.git
 
-[submodule "apps/user"]
+[submodule "user"]
 	path = apps/user
 	url = git@github.com:dhruv-0-0-7/microservices-assignment-user-service.git
 
-[submodule "apps/post"]
+[submodule "post"]
 	path = apps/post
 	url = git@github.com:dhruv-0-0-7/microservices-assignment-post-service.git
 
-[submodule "apps/comment"]
+[submodule "comment"]
 	path = apps/comment
 	url = git@github.com:dhruv-0-0-7/microservices-assignment-comment-service.git
