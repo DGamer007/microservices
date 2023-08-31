@@ -1,0 +1,9 @@
+node_modules
+apps/auth
+apps/user
+apps/post
+apps/comment
+.env*
+.git*
+.restbook
+*.md

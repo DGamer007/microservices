@@ -1,0 +1,75 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    ports:
+      - "15672:15672"
+    expose:
+      - 5672
+
+  gateway:
+    build: .
+    env_file:
+      - ./.env
+    ports:
+      - "5000:$GATEWAY_PORT"
+  
+  auth-v1:
+    build: apps/auth
+    depends_on:
+      - rabbitmq
+      - gateway
+    env_file:
+      - ./.env
+      - ./apps/auth/.env
+    environment:
+      - RMQ_URL=amqp://rabbitmq
+      - GATEWAY_URL=http://gateway:$GATEWAY_PORT
+    command: ["sh","-c","sleep 5 && npm start"]
+
+  user-v1:
+    build: apps/user
+    depends_on:
+      - rabbitmq
+      - gateway
+    env_file:
+      - ./.env
+      - ./apps/user/.env
+    environment:
+      - RMQ_URL=amqp://rabbitmq
+      - GATEWAY_URL=http://gateway:$GATEWAY_PORT
+    command: ["sh","-c","sleep 5 && npm start"]
+
+  post-v1:
+    build: apps/post
+    depends_on:
+      - gateway
+    env_file:
+      - ./.env
+      - ./apps/post/.env
+    environment:
+      - GATEWAY_URL=http://gateway:$GATEWAY_PORT
+    command: ["npm", "start"]
+
+  comment-v1:
+    build: apps/comment
+    depends_on:
+      - gateway
+    env_file:
+      - ./.env
+      - ./apps/comment/.env
+    environment:
+      - GATEWAY_URL=http://gateway:$GATEWAY_PORT
+    command: ["npm", "start"]
+
+  post-v2:
+    build: apps/post
+    depends_on:
+      - gateway
+    env_file:
+      - ./.env
+      - ./apps/post/.env
+    environment:
+      - GATEWAY_URL=http://gateway:$GATEWAY_PORT
+    command: ["npm","start","--","post","v2"]

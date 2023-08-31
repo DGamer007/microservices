@@ -1,15 +1,15 @@
 [submodule "auth"]
 	path = apps/auth
-	url = git@github.com:dhruv-0-0-7/microservices-assignment-auth-service.git
+	url = git@github.com:DGamer007/microservices-auth-service.git
 
 [submodule "user"]
 	path = apps/user
-	url = git@github.com:dhruv-0-0-7/microservices-assignment-user-service.git
+	url = git@github.com:DGamer007/microservices-user-service.git
 
 [submodule "post"]
 	path = apps/post
-	url = git@github.com:dhruv-0-0-7/microservices-assignment-post-service.git
+	url = git@github.com:DGamer007/microservices-post-service.git
 
 [submodule "comment"]
 	path = apps/comment
-	url = git@github.com:dhruv-0-0-7/microservices-assignment-comment-service.git
+	url = git@github.com:DGamer007/microservices-comment-service.git

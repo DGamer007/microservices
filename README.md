@@ -30,8 +30,8 @@
 
 ## All Repository Urls
 
-- [Gateway Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-gateway)
-- [Auth Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-auth-service)
-- [User Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-user-service)
-- [Post Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-post-service)
-- [Comment Service Github Repo](https://github.com/dhruv-0-0-7/microservices-assignment-comment-service)
+- [Gateway Github Repo](https://github.com/DGamer007/microservices)
+- [Auth Service Github Repo](https://github.com/DGamer007/microservices-auth-service)
+- [User Service Github Repo](https://github.com/DGamer007/microservices-user-service)
+- [Post Service Github Repo](https://github.com/DGamer007/microservices-post-service)
+- [Comment Service Github Repo](https://github.com/DGamer007/microservices-comment-service)

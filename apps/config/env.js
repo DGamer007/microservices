@@ -1,5 +1,5 @@
 module.exports = {
-    PORT: (process.env.PORT && parseInt(process.env.PORT)) || 3000,
+    PORT: (process.env.GATEWAY_PORT && parseInt(process.env.GATEWAY_PORT)) || 3000,
 
     DEFAULT_FAILURE_THRESHOLD: process.env.DEFAULT_FAILURE_THRESHOLD && parseInt(process.env.DEFAULT_FAILURE_THRESHOLD),
 
